@@ -808,6 +808,28 @@ class Fitbit(object):
         )
         return self.make_request(url)
 
+    def get_sleep_before(self, beforeDate, limit=31, sort="desc"):
+        """
+        clones the functionality of querying the endpoint
+        GET https://api.fitbit.com/1.2/user/-/sleep/list.json
+        in v1.2 of the Fitbit sleep API. An example request as listed
+        in https://dev.fitbit.com/build/reference/web-api/sleep/ is
+        GET https://api.fitbit.com/1.2/user/-/sleep/list.json?beforeDate=2017-03-27&sort=desc&offset=0&limit=1
+            - beforeDate or afterDate must be specified
+            - offset must be set to 0 (but is required for now)
+            - sort specifies if the list of sleep objects need to be in some sort of sorted order
+            - limit specifies the number of days needed from the before or after date (does not
+              let you write an unending query, hard to know what the limit is, just need to specify an upper max)
+        """
+        url - "{0}/{1}/user/-/sleep/list.json?beforeDate={year}-{month}-{day}&sort={sort}&offset=0&limit={limit}".format(
+            *self._get_common_args(),
+            year=beforeDate.year,
+            month=beforeDate.month,
+            day=beforeDate.day,
+            sort=sort,
+            limit=limit
+        )
+
     def log_sleep(self, start_time, duration):
         """
         https://dev.fitbit.com/docs/sleep/#log-sleep
