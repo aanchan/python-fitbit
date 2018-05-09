@@ -20,7 +20,7 @@ from .utils import curry
 class FitbitOauth2Client(object):
     API_ENDPOINT = "https://api.fitbit.com"
     AUTHORIZE_ENDPOINT = "https://www.fitbit.com"
-    API_VERSION = 1
+    API_VERSION = 1.2
 
     request_token_url = "%s/oauth2/token" % API_ENDPOINT
     authorization_url = "%s/oauth2/authorize" % AUTHORIZE_ENDPOINT
@@ -100,7 +100,7 @@ class FitbitOauth2Client(object):
 
         return response
 
-    def authorize_token_url(self, scope=None, redirect_uri=None, **kwargs):
+    def authorize_token_url(self, scope=None, redirect_uri=None, state=None, **kwargs):
         """Step 1: Return the URL the user needs to go to in order to grant us
         authorization to look at their data.  Then redirect the user to that
         URL, open their browser to it, or tell them to copy the URL into their
@@ -128,7 +128,7 @@ class FitbitOauth2Client(object):
         if redirect_uri:
             self.session.redirect_uri = redirect_uri
 
-        return self.session.authorization_url(self.authorization_url, **kwargs)
+        return self.session.authorization_url(self.authorization_url, state=state, **kwargs)
 
     def fetch_access_token(self, code, redirect_uri=None):
 
@@ -187,7 +187,7 @@ class Fitbit(object):
     METRIC = 'en_UK'
 
     API_ENDPOINT = "https://api.fitbit.com"
-    API_VERSION = 1
+    API_VERSION = 1.2
     WEEK_DAYS = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY']
     PERIODS = ['1d', '7d', '30d', '1w', '1m', '3m', '6m', '1y', 'max']
 
