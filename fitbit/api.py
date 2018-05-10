@@ -815,7 +815,7 @@ class Fitbit(object):
         in v1.2 of the Fitbit sleep API. An example request as listed
         in https://dev.fitbit.com/build/reference/web-api/sleep/ is
         GET https://api.fitbit.com/1.2/user/-/sleep/list.json?beforeDate=2017-03-27&sort=desc&offset=0&limit=1
-            - beforeDate or afterDate must be specified
+            - beforeDate or afterDate must be specified, must be a datetime object
             - offset must be set to 0 (but is required for now)
             - sort specifies if the list of sleep objects need to be in some sort of sorted order
             - limit specifies the number of days needed from the before or after date (does not
