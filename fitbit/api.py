@@ -821,7 +821,7 @@ class Fitbit(object):
             - limit specifies the number of days needed from the before or after date (does not
               let you write an unending query, hard to know what the limit is, just need to specify an upper max)
         """
-        url - "{0}/{1}/user/-/sleep/list.json?beforeDate={year}-{month}-{day}&sort={sort}&offset=0&limit={limit}".format(
+        url = "{0}/{1}/user/-/sleep/list.json?beforeDate={year}-{month}-{day}&sort={sort}&offset=0&limit={limit}".format(
             *self._get_common_args(),
             year=beforeDate.year,
             month=beforeDate.month,
@@ -829,6 +829,7 @@ class Fitbit(object):
             sort=sort,
             limit=limit
         )
+        return self.make_request(url)
 
     def log_sleep(self, start_time, duration):
         """
