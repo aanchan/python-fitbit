@@ -841,7 +841,7 @@ class Fitbit(object):
         Returns:
             Make request, and return a response
         """
-        url = "{0}/{1}/user/-/sleep/date/{startYear}-{startMonth}-{starDay}/{endYear}-{endMonth}-{endDay}.json".format(
+        url = "{0}/{1}/user/-/sleep/date/{startYear}-{startMonth}-{startDay}/{endYear}-{endMonth}-{endDay}.json".format(
             *self._get_common_args(),
             startYear=startDate.year,
             startMonth=startDate.month,
@@ -851,7 +851,7 @@ class Fitbit(object):
             endDay=endDate.day
         )
         return self.make_request(url)
-    
+
     def log_sleep(self, start_time, duration):
         """
         https://dev.fitbit.com/docs/sleep/#log-sleep
