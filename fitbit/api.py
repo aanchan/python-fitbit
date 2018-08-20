@@ -843,12 +843,12 @@ class Fitbit(object):
         """
         url = "{0}/{1}/user/-/sleep/date/{startYear}-{startMonth}-{startDay}/{endYear}-{endMonth}-{endDay}.json".format(
             *self._get_common_args(),
-            startYear=startDate.year,
-            startMonth=startDate.month,
-            startDay=startDate.day,
-            endYear= endDate.year,
-            endMonth=endDate.month,
-            endDay=endDate.day
+            startYear=startDate.strftime('%Y'),
+            startMonth=startDate.strftime('%m'),
+            startDay=startDate.strftime('%d'),
+            endYear= endDate.strftime('%Y'),
+            endMonth=endDate.strftime('%m'),
+            endDay=endDate.strftime('%d')
         )
         return self.make_request(url)
 
