@@ -831,6 +831,27 @@ class Fitbit(object):
         )
         return self.make_request(url)
 
+    def get_sleep_between(self, startDate, endDate):
+        """
+        Gets sleep logs by date range
+        https://dev.fitbit.com/build/reference/web-api/sleep/#get-sleep-logs-by-date-range
+        Args:
+            startDate: The start date for Fitbit sleep log
+            endDate: The end date for Fitbit sleep log
+        Returns:
+            Make request, and return a response
+        """
+        url = "{0}/{1}/user/-/sleep/date/{startYear}-{startMonth}-{starDay}/{endYear}-{endMonth}-{endDay}.json".format(
+            *self._get_common_args(),
+            startYear=startDate.year,
+            startMonth=startDate.month,
+            startDay=startDate.day,
+            endYear= endDate.year,
+            endMonth=endDate.month,
+            endDay=endDate.day
+        )
+        return self.make_request(url)
+    
     def log_sleep(self, start_time, duration):
         """
         https://dev.fitbit.com/docs/sleep/#log-sleep
