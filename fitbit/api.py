@@ -333,20 +333,22 @@ class Fitbit(object):
         * https://dev.fitbit.com/docs/
         """
 
-        if list_arg:
-            kwargs = {'resource': resource}
-            base_url = "{0}/{1}/user/{2}/{resource}/list.json"
-        else:
-            if not date:
-                date = datetime.date.today()
-            date_string = self._get_date_string(date)
 
-            kwargs = {'resource': resource, 'date': date_string}
-            if not data:
-                base_url = "{0}/{1}/user/{2}/{resource}/date/{date}.json"
+        if not date:
+            date = datetime.date.today()
+        date_string = self._get_date_string(date)
+
+
+        kwargs = {'resource': resource, 'date': date_string}
+        if not data:
+            if list_arg:
+                base_url = "{0}/{1}/user/{2}/{resource}/list.json?beforeDate={date}"
             else:
-                data['date'] = date_string
-                base_url = "{0}/{1}/user/{2}/{resource}.json"
+                base_url = "{0}/{1}/user/{2}/{resource}/date/{date}.json"
+        else:
+            data['date'] = date_string
+            base_url = "{0}/{1}/user/{2}/{resource}.json"
+
 
         url = base_url.format(*self._get_common_args(user_id), **kwargs)
         return self.make_request(url, data)
