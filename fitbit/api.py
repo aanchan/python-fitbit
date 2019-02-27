@@ -334,6 +334,7 @@ class Fitbit(object):
         """
 
         if list_arg:
+            kwargs = {'resource': resource}
             base_url = "{0}/{1}/user/{2}/{resource}/list.json"
         else:
             if not date:
