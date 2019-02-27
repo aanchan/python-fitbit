@@ -310,7 +310,7 @@ class Fitbit(object):
         return date
 
     def _COLLECTION_RESOURCE(self, resource, date=None, user_id=None,
-                             data=None):
+                             data=None, list_arg=False):
         """
         Retrieving and logging of each type of collection data.
 
@@ -340,9 +340,12 @@ class Fitbit(object):
         kwargs = {'resource': resource, 'date': date_string}
         if not data:
             base_url = "{0}/{1}/user/{2}/{resource}/date/{date}.json"
+        elif list_arg:
+            base_url = "{0}/{1}/user/{2}/{resource}/list.json"
         else:
             data['date'] = date_string
             base_url = "{0}/{1}/user/{2}/{resource}.json"
+
         url = base_url.format(*self._get_common_args(user_id), **kwargs)
         return self.make_request(url, data)
 
