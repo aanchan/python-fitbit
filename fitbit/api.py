@@ -342,7 +342,7 @@ class Fitbit(object):
         kwargs = {'resource': resource, 'date': date_string}
         if not data:
             if list_arg:
-                base_url = "{0}/{1}/user/{2}/{resource}/list.json?beforeDate={date}"
+                base_url = "{0}/{1}/user/{2}/{resource}/list.json?beforeDate={date}&sort=desc&offset=0"
             else:
                 base_url = "{0}/{1}/user/{2}/{resource}/date/{date}.json"
         else:
