@@ -877,7 +877,7 @@ class Fitbit(object):
         Returns:
             Make request, and return a response
         """
-        url = "{0}/{1}/user/-/activities/list.json?afterDate?={startYear}-{startMonth}-{startDay}&beforeDate={endYear}-{endMonth}-{endDay}&offset=0&sort={sort}&limit={limit}".format(
+        url = "{0}/{1}/user/-/activities/list.json?afterDate={startYear}-{startMonth}-{startDay}&beforeDate={endYear}-{endMonth}-{endDay}&offset=0&sort={sort}&limit={limit}".format(
             *self._get_common_args(),
             startYear=startDate.strftime('%Y'),
             startMonth=startDate.strftime('%m'),
