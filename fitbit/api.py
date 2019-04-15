@@ -846,7 +846,7 @@ class Fitbit(object):
         )
         return self.make_request(url)
 
-    def get_sleep_between(self, startDate, endDate, resource):
+    def get_sleep_between(self, startDate, endDate):
         """
         Gets sleep logs by date range
         https://dev.fitbit.com/build/reference/web-api/sleep/#get-sleep-logs-by-date-range
@@ -867,7 +867,7 @@ class Fitbit(object):
         )
         return self.make_request(url)
 
-    def get_activities_between(self, startDate, endDate, sort="desc"):
+    def get_activities_between(self, startDate, endDate, sort="desc", limit=31):
         """
         Gets sleep logs by date range
         https://dev.fitbit.com/build/reference/web-api/sleep/#get-sleep-logs-by-date-range
@@ -877,7 +877,7 @@ class Fitbit(object):
         Returns:
             Make request, and return a response
         """
-        url = "{0}/{1}/user/-/activities/list.json?afterDate?={startYear}-{startMonth}-{startDay}&beforeDate={endYear}-{endMonth}-{endDay}&offset=0&sort={sort}".format(
+        url = "{0}/{1}/user/-/activities/list.json?afterDate?={startYear}-{startMonth}-{startDay}&beforeDate={endYear}-{endMonth}-{endDay}&offset=0&sort={sort}&limit={limit}".format(
             *self._get_common_args(),
             startYear=startDate.strftime('%Y'),
             startMonth=startDate.strftime('%m'),
