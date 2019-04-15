@@ -846,7 +846,7 @@ class Fitbit(object):
         )
         return self.make_request(url)
 
-    def get_resource_between(self, startDate, endDate, resource='sleep'):
+    def get_sleep_between(self, startDate, endDate, resource):
         """
         Gets sleep logs by date range
         https://dev.fitbit.com/build/reference/web-api/sleep/#get-sleep-logs-by-date-range
@@ -856,9 +856,8 @@ class Fitbit(object):
         Returns:
             Make request, and return a response
         """
-        url = "{0}/{1}/user/-/{resource}/date/{startYear}-{startMonth}-{startDay}/{endYear}-{endMonth}-{endDay}.json".format(
+        url = "{0}/{1}/user/-/sleep/date/{startYear}-{startMonth}-{startDay}/{endYear}-{endMonth}-{endDay}.json".format(
             *self._get_common_args(),
-            resource=resource,
             startYear=startDate.strftime('%Y'),
             startMonth=startDate.strftime('%m'),
             startDay=startDate.strftime('%d'),
@@ -866,6 +865,27 @@ class Fitbit(object):
             endMonth=endDate.strftime('%m'),
             endDay=endDate.strftime('%d')
         )
+        return self.make_request(url)
+
+    def get_activities_between(self, startDate, endDate, sort="desc"):
+        """
+        Gets sleep logs by date range
+        https://dev.fitbit.com/build/reference/web-api/sleep/#get-sleep-logs-by-date-range
+        Args:
+            startDate: The start date for Fitbit sleep log
+            endDate: The end date for Fitbit sleep log
+        Returns:
+            Make request, and return a response
+        """
+        url = "{0}/{1}/user/-/activities/list.json?afterDate?={startYear}-{startMonth}-{startDay}&beforeDate={endYear}-{endMonth}-{endDay}&offset=0&sort={sort}".format(
+            *self._get_common_args(),
+            startYear=startDate.strftime('%Y'),
+            startMonth=startDate.strftime('%m'),
+            startDay=startDate.strftime('%d'),
+            endYear= endDate.strftime('%Y'),
+            endMonth=endDate.strftime('%m'),
+            endDay=endDate.strftime('%d'),
+            sort=sort)
         return self.make_request(url)
 
     def log_sleep(self, start_time, duration):
