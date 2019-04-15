@@ -885,7 +885,8 @@ class Fitbit(object):
             endYear= endDate.strftime('%Y'),
             endMonth=endDate.strftime('%m'),
             endDay=endDate.strftime('%d'),
-            sort=sort)
+            sort=sort,
+            limit=limit)
         return self.make_request(url)
 
     def log_sleep(self, start_time, duration):
