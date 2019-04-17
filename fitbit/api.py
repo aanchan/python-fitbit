@@ -1050,7 +1050,7 @@ class Fitbit(object):
         kwargs = {'collection': '', 'end_string': subscription_id}
         if collection:
             kwargs = {
-                'end_string': '-'.join([subscription_id, collection]),
+                'end_string': subscription_id,
                 'collection': '/' + collection
             }
         return self.make_request(
