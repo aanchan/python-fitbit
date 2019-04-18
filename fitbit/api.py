@@ -808,7 +808,7 @@ class Fitbit(object):
         )
         return self.make_request(url)
 
-    def get_sleep_before_with_url(self, url):
+    def get_resource_before_with_url(self, url):
         """
         This makes the same request as get_sleep_before,
         exept that the url comes pre-constructed. The url
@@ -822,7 +822,7 @@ class Fitbit(object):
         """
         return self.make_request(url)
     
-    def get_sleep_before(self, beforeDate, limit=31, sort="desc"):
+    def get_resource_before(self, beforeDate, resource='sleep', limit=31, sort="desc"):
         """
         clones the functionality of querying the endpoint
         GET https://api.fitbit.com/1.2/user/-/sleep/list.json
@@ -835,13 +835,14 @@ class Fitbit(object):
             - limit specifies the number of days needed from the before or after date (does not
               let you write an unending query, hard to know what the limit is, just need to specify an upper max)
         """
-        url = "{0}/{1}/user/-/sleep/list.json?beforeDate={year}-{month}-{day}&sort={sort}&offset=0&limit={limit}".format(
+        url = "{0}/{1}/user/-/{resource}/list.json?beforeDate={year}-{month}-{day}&sort={sort}&offset=0&limit={limit}".format(
             *self._get_common_args(),
             year=beforeDate.year,
             month=beforeDate.month,
             day=beforeDate.day,
             sort=sort,
-            limit=limit
+            limit=limit,
+            resource=resource
         )
         return self.make_request(url)
 
